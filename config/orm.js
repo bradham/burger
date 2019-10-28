@@ -9,6 +9,7 @@ use in order to retrieve and store data in your database.
 
 selectAll()
 insertOne()
+INSERT INTO burgers (burger_name) VALUES ('Chicken Burger');
 updateOne()
  */
 
@@ -17,34 +18,60 @@ updateOne()
 // These help avoid SQL injection
 // https://en.wikipedia.org/wiki/SQL_injection
 var orm = {
-  selectWhere: function(tableInput, colToSearch, valOfCol) {
-    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
-    connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
-      if (err) throw err;
-      console.log(result);
-    });
-  },
-  selectAndOrder: function(whatToSelect, table, orderCol) {
-    var queryString = "SELECT ?? FROM ?? ORDER BY ?? DESC";
-    console.log(queryString);
-    connection.query(queryString, [whatToSelect, table, orderCol], function(err, result) {
-      if (err) throw err;
-      console.log(result);
-    });
-  },
-  findWhoHasMost: function(tableOneCol, tableTwoForeignKey, tableOne, tableTwo) {
-    var queryString =
-      "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
+    selectAll: function (tableInput, callBack) {
+        var queryString = "SELECT * FROM ??";
+        connection.query(queryString, [tableInput], function (err, result) {
+            if (err) throw err;
+            console.log("selectAll in orm.js result: " + result);
+            callBack(result);
+        });
+    },
+    insertOne: function (tableInput, colInput, valOfCol) {
+        var queryString = "INSERT INTO ?? (??) VALUES (?)";
+        connection.query(queryString, [tableInput, colInput, valOfCol], function (err, result) {
+            if (err) throw err;
+            console.log("orm.js insertOne Inserted result: " + result);
+        });
+    },
+    updateOne: function (tableInput, colInput, valOfCol, valOfID) {
+        var queryString = "UPDATE ?? SET ?? = ? WHERE id = ?";
+        /* UPDATE Customers
+           SET ContactName='Alfred Schmidt', City='Frankfurt'
+           WHERE CustomerID=1; */
+        connection.query(queryString, [tableInput, colInput, valOfCol, valOfID], function (err, result) {
+            if (err) throw err;
+            console.log("Updated: " + result);
+        });
+    },
 
-    connection.query(
-      queryString,
-      [tableOneCol, tableOneCol, tableOne, tableTwo, tableTwo, tableTwoForeignKey, tableOne, tableOneCol],
-      function(err, result) {
-        if (err) throw err;
-        console.log(result);
-      }
-    );
-  }
+    selectWhere: function (tableInput, colToSearch, valOfCol) {
+        var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+        connection.query(queryString, [tableInput, colToSearch, valOfCol], function (err, result) {
+            if (err) throw err;
+            console.log(result);
+        });
+    },
+    selectAndOrder: function (whatToSelect, table, orderCol) {
+        var queryString = "SELECT ?? FROM ?? ORDER BY ?? DESC";
+        console.log(queryString);
+        connection.query(queryString, [whatToSelect, table, orderCol], function (err, result) {
+            if (err) throw err;
+            console.log(result);
+        });
+    },
+    findWhoHasMost: function (tableOneCol, tableTwoForeignKey, tableOne, tableTwo) {
+        var queryString =
+            "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
+
+        connection.query(
+            queryString,
+            [tableOneCol, tableOneCol, tableOne, tableTwo, tableTwo, tableTwoForeignKey, tableOne, tableOneCol],
+            function (err, result) {
+                if (err) throw err;
+                console.log(result);
+            }
+        );
+    }
 };
 
 module.exports = orm;
