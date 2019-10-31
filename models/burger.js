@@ -9,13 +9,16 @@ var burger = {
     //code 
     getBurgers: function(callBack) {
         orm.selectAll("burgers", function(res) {
-            console.log("res in getBurgers burger.js: " + res);
+            console.log("res in getBurgers burger.js: " + JSON.stringify(res));
             callBack(res);
           });
     },
 
-    addBurger: function(newBurger) {
-        orm.insertOne("burgers", "burger_name", newBurger);
+    addBurger: function(newBurger, callBack) {
+        orm.insertOne("burgers", "burger_name", newBurger, function(res) {
+            callBack(res);
+        });
+
     },
 
     updateBurger: function(burger, id) {
