@@ -3,19 +3,9 @@ var burger = require("../models/burger.js");
 
 var router = express.Router();
 
-//Home route
-router.get("/", function(req, res) {
-  // cat.all(function(data) {
-  //   var hbsObject = {
-  //     cats: data
-  //   };
-  //   console.log(hbsObject);
-    res.render("index");
-  //});
-});
 
 //api route to return all burgers
-router.get("/api/burgers", function(req, res) {
+router.get("/", function(req, res) {
     
     burger.getBurgers(function(data) {
         var hbsObject = {
@@ -25,13 +15,26 @@ router.get("/api/burgers", function(req, res) {
         res.render("index", hbsObject);
       });
 
-
   });
 
+  //rout to create a burger in the db
   router.post("/burgers/create", function(req, res){
+
     burger.addBurger(req.body.burger_name, function(result) {
-      res.json({ id: result.insertId });
+
+      res.redirect("/");
+      //res.json({ id: result.insertId });
     });
   });
+
+  //route to update a burger
+  router.put("/burgers/update", function(req, res) {
+
+    burger.updateBurger(req.body.burger_id, function(result) {
+
+      res.redirect("/");
+
+    })
+  })
 
 module.exports = router;

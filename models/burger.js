@@ -1,9 +1,5 @@
 var orm = require("../config/orm.js");
 
-/* 
-TODO
-create the code that will call the ORM functions using burger specific input for the ORM
-*/
 
 var burger = {
     //code 
@@ -21,8 +17,11 @@ var burger = {
 
     },
 
-    updateBurger: function(burger, id) {
-        orm.updateOne("burgers", "burger_name", burger, id);
+    updateBurger: function(burger, id, callBack) {
+        //TODO: set devoured value to true
+        orm.updateOne("burgers", "devoured", true, id, function(res) {
+            callBack(res);
+        });
     }
 };
 

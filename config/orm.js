@@ -34,17 +34,19 @@ var orm = {
             callBack(result);
         });
     },
-    updateOne: function (tableInput, colInput, valOfCol, valOfID) {
+    updateOne: function (tableInput, colInput, valOfCol, valOfID, callBack) {
         var queryString = "UPDATE ?? SET ?? = ? WHERE id = ?";
-        /* UPDATE Customers
-           SET ContactName='Alfred Schmidt', City='Frankfurt'
-           WHERE CustomerID=1; */
+
+        //TODO: set devoured value to true
+
         connection.query(queryString, [tableInput, colInput, valOfCol, valOfID], function (err, result) {
             if (err) throw err;
             console.log("Updated: " + result);
+            callBack(result);
         });
     },
 
+    //Extra functions for future use 
     selectWhere: function (tableInput, colToSearch, valOfCol) {
         var queryString = "SELECT * FROM ?? WHERE ?? = ?";
         connection.query(queryString, [tableInput, colToSearch, valOfCol], function (err, result) {
