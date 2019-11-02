@@ -25,15 +25,13 @@ router.get("/api/burgers", function(req, res) {
         res.render("index", hbsObject);
       });
 
-    // cat.create([
-    //   "name", "sleepy"
-    // ], [
-    //   req.body.name, req.body.sleepy
-    // ], function(result) {
-    //   // Send back the ID of the new quote
-    //   res.json({ id: result.insertId });
-    // });
 
+  });
+
+  router.post("/burgers/create", function(req, res){
+    burger.addBurger(req.body.burger_name, function(result) {
+      res.json({ id: result.insertId });
+    });
   });
 
 module.exports = router;

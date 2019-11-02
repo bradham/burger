@@ -22,15 +22,16 @@ var orm = {
         var queryString = "SELECT * FROM ??";
         connection.query(queryString, [tableInput], function (err, result) {
             if (err) throw err;
-            console.log("selectAll in orm.js result: " + result);
+            //console.log("selectAll in orm.js result: " + result);
             callBack(result);
         });
     },
-    insertOne: function (tableInput, colInput, valOfCol) {
+    insertOne: function (tableInput, colInput, valOfCol, callBack) {
         var queryString = "INSERT INTO ?? (??) VALUES (?)";
         connection.query(queryString, [tableInput, colInput, valOfCol], function (err, result) {
             if (err) throw err;
             console.log("orm.js insertOne Inserted result: " + result);
+            callBack(result);
         });
     },
     updateOne: function (tableInput, colInput, valOfCol, valOfID) {

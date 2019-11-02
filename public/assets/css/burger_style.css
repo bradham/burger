@@ -1,0 +1,39 @@
+body {
+
+    font-size: 10pt;
+  
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  
+    color: black;
+  
+    line-height: 14pt;
+  
+    padding-left: 5pt;
+  
+    padding-right: 5pt;
+  
+    padding-top: 5pt;
+
+    background-color: green;
+  
+  }
+  
+  
+  h1 {
+  
+    font: 14pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+  
+    font-weight: bold;
+  
+    line-height: 20pt;
+
+    background-color: green;
+
+  
+  }
+
+  div {
+    padding: 5px;
+    margin: 5px;
+    background: #faebd7;
+  }

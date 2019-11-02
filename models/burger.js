@@ -9,7 +9,7 @@ var burger = {
     //code 
     getBurgers: function(callBack) {
         orm.selectAll("burgers", function(res) {
-            console.log("res in getBurgers burger.js: " + JSON.stringify(res));
+            //console.log("res in getBurgers burger.js: " + JSON.stringify(res));
             callBack(res);
           });
     },
