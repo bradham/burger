@@ -11,7 +11,7 @@ router.get("/", function(req, res) {
         var hbsObject = {
           burgers: data
         };
-        console.log(hbsObject);
+        //console.log(hbsObject);
         res.render("index", hbsObject);
       });
 
@@ -28,13 +28,24 @@ router.get("/", function(req, res) {
   });
 
   //route to update a burger
-  router.put("/burgers/update", function(req, res) {
+  router.put("/burgers/update/:id", function(req, res) {
 
-    burger.updateBurger(req.body.burger_id, function(result) {
+    var burgerID = req.params.id;
 
-      res.redirect("/");
+    console.log("burgerID in router.put controller is: " + burgerID);
 
-    })
-  })
+    burger.updateBurger(burgerID, function(result) {
+
+      if (result.changedRows == 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      } else {
+        res.status(200).end();
+      }
+
+      //res.redirect("/");
+
+    });
+  });
 
 module.exports = router;

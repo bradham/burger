@@ -41,7 +41,7 @@ var orm = {
 
         connection.query(queryString, [tableInput, colInput, valOfCol, valOfID], function (err, result) {
             if (err) throw err;
-            console.log("Updated: " + result);
+            console.log("Updated in orm updateOne: " + result);
             callBack(result);
         });
     },

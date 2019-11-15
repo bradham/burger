@@ -17,9 +17,10 @@ var burger = {
 
     },
 
-    updateBurger: function(burger, id, callBack) {
+    updateBurger: function(id, callBack) {
         //TODO: set devoured value to true
         orm.updateOne("burgers", "devoured", true, id, function(res) {
+            console.log("updateBurger res is: " + res);
             callBack(res);
         });
     }
