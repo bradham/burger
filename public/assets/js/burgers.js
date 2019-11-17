@@ -1,6 +1,6 @@
 $(function() {
     $(".devour-btn").on("click", function(event) {
-      var id = $(this).value("id"); //.data or .value?
+      var id = $(this).data("id"); //.data or .value?
       console.log("id in .js file: " + id);
       //var newSleep = $(this).data("newsleep");
   
@@ -9,7 +9,7 @@ $(function() {
     //   };
   
       // Send the PUT request.
-      $.ajax("/api/cats/" + id , {
+      $.ajax("/burgers/update/" + id , {
         type: "PUT"
         //data: newSleepState
       }
