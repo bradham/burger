@@ -1,37 +1,40 @@
-
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center" id="top-bar">
             <img src="/assets/images/cartoon-burger.png" alt="burger" />
             <h1> Eat-Da-Burger! </h1>
         </div>
-        <div class="col-md-6 text-center" class="task">
+    </div>
+    <div class="row text-center burger-container" class="task">
+        <div class="col-md-7">
             <div class="row">
-              {{#each burgers}}
-                  {{#unless this.devoured}}
-                <div class="col-md-9 text-center">
+                {{#each burgers}}
+                {{#unless this.devoured}}
+                <div class="col-sm-7 undevoured-burger">
                     <pre>{{this.id}}. {{this.burger_name}}
                     </pre>
-                          <!-- {{this.Date}} -->
                 </div>
-                <div class="col-md-3 text-center">
+
+                <div class="col-sm-4 devour-btn-div">
                     <form class="devour-form button-size">
                         <input input type="hidden" class="burger_id" type="text" value={{this.id}}><br>
-                        <button type="submit" class="btn btn-default devour-btn" data-id="{{id}}">Devour it!</button>
+                        <button type="submit" class="btn btn-secondary devour-btn" data-id="{{id}}">Devour it!</button>
                     </form>
                 </div>
                 {{/unless}}
-              {{/each}}
+                {{/each}}
             </div>
         </div>
-        <div class="col-md-6 text-center" class="task">
-              {{#each burgers}}
-                  {{#if this.devoured}}
-                      <input class="form-control" type="text" placeholder="{{this.id}} . {{this.burger_name}}" readonly>
-                {{/if}}
-              {{/each}}
+        <div class="col-md-4 text-center devoured-burger" class="task">
+            {{#each burgers}}
+            {{#if this.devoured}}
+            <input class="form-control" type="text" placeholder="{{this.id}} . {{this.burger_name}}" readonly>
+            {{/if}}
+            {{/each}}
         </div>
+
     </div>
+
 </div>
 <div class="container">
     <div class="row">
