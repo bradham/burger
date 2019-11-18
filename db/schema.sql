@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS `burgers_db`;
+DROP DATABASE IF EXISTS burgers_db;
 
-### Schema
+-- Schema
 CREATE DATABASE burgers_db;
 USE burgers_db;
 
